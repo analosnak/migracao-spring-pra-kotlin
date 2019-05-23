@@ -17,6 +17,6 @@ public class NewReplyProcessorService {
 
 	public void execute(Answer answer) {
 		this.answerRepository.save(answer);
-		this.forumMailService.sendNewReplyMail(answer);
+		this.forumMailService.sendNewReplyMailAsync(answer);
 	}
 }

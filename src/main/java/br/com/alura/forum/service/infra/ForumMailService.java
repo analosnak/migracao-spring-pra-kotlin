@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.forum.model.Answer;
@@ -18,7 +19,8 @@ public class ForumMailService {
 	@Autowired
     private MailSender mailSender;
 	
-	public void sendNewReplyMail(Answer answer) {
+	@Async
+	public void sendNewReplyMailAsync(Answer answer) {
 		Topic answeredTopic = answer.getTopic();
 		
 		SimpleMailMessage message = new SimpleMailMessage();
