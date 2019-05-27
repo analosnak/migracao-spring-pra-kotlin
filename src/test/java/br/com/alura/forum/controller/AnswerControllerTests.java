@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.web.util.UriTemplate;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.alura.forum.controller.dto.input.NewAnswerInputDto;
@@ -95,5 +96,22 @@ public class AnswerControllerTests {
 				.andExpect(status().isCreated())
 				.andExpect(content()
 						.string(CoreMatchers.containsString(newAnswerInputDto.getContent())));
+	}
+	
+	@Test
+	public void shouldRejectNewAnswerRequest() throws Exception {
+		URI uri = new UriTemplate(ENDPOINT).expand(this.topicId);
+
+		NewAnswerInputDto newAnswerInputDto = new NewAnswerInputDto();
+		newAnswerInputDto.setContent("bad");
+		
+		MockHttpServletRequestBuilder request = post(uri)
+				.contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", "Bearer " + this.jwt)
+				.content(new ObjectMapper().writeValueAsString(newAnswerInputDto));
+		
+		this.mockMvc.perform(request)
+			.andExpect(status().isBadRequest());
+		
 	}
 }
