@@ -25,7 +25,6 @@ class TopicOutputDto(topic: Topic) {
     init {
         this.id = topic.id
         this.shortDescription = topic.shortDescription
-        print(topic.content)
         this.content = topic.content
         this.status = topic.status
         this.numberOfResponses = topic.numberOfAnswers
