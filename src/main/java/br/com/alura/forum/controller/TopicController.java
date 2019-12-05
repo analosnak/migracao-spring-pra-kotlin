@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.com.alura.forum.controller.dto.output.TopicOutputDto;
+import br.com.alura.forum.repository.TopicRepository;
 import br.com.alura.forum.validator.NewTopicCustomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,6 @@ import br.com.alura.forum.controller.dto.output.TopicDashboardItemOutputDto;
 import br.com.alura.forum.model.User;
 import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.CourseRepository;
-import br.com.alura.forum.repository.TopicRepository;
 import br.com.alura.forum.service.DashboardDataProcessingService;
 import br.com.alura.forum.vo.CategoriesAndTheirStatisticsData;
 
