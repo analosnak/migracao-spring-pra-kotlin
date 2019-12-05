@@ -5,17 +5,17 @@ import br.com.alura.forum.model.topic.domain.TopicStatus
 import java.time.Instant
 
 class TopicOutputDto(topic: Topic) {
-    val id: Long
-    val shortDescription: String
-    val content: String
-    val status: TopicStatus
-    val numberOfResponses: Int
-    val creationInstant: Instant
-    val lastUpdate: Instant
-    val ownerName: String
-    val courseName: String
-    val subcategoryName: String
-    val categoryName: String
+    val id: Long = topic.id
+    val shortDescription: String = topic.shortDescription
+    val content: String = topic.content
+    val status: TopicStatus = topic.status
+    val numberOfResponses: Int = topic.numberOfAnswers
+    val creationInstant: Instant = topic.creationInstant
+    val lastUpdate: Instant = topic.lastUpdate
+    val ownerName: String = topic.owner.name
+    val courseName: String = topic.course.name
+    val subcategoryName: String = topic.course.subcategoryName
+    val categoryName: String = topic.course.categoryName
     private val answers: MutableList<AnswerOutputDto> = ArrayList()
 
     fun getAnswers(): List<AnswerOutputDto> {
@@ -23,18 +23,6 @@ class TopicOutputDto(topic: Topic) {
     }
 
     init {
-        this.id = topic.id
-        this.shortDescription = topic.shortDescription
-        this.content = topic.content
-        this.status = topic.status
-        this.numberOfResponses = topic.numberOfAnswers
-        this.creationInstant = topic.creationInstant
-        this.lastUpdate = topic.lastUpdate
-        this.ownerName = topic.owner.name
-        this.courseName = topic.course.name
-        this.subcategoryName = topic.course.subcategoryName
-        this.categoryName = topic.course.categoryName
-
         val answers = AnswerOutputDto.listFromAnswers(topic.answers)
         this.answers.addAll(answers)
     }
