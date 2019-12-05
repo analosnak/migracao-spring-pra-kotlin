@@ -12,9 +12,5 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/topics")
 class TopicControllerKotlin(val topicRepository: TopicRepository) {
 	@GetMapping(value = ["/{id}"], produces = [MediaType.APPLICATION_JSON_VALUE])
-	fun getTopicDetails(@PathVariable id: Long): TopicOutputDto {
-		val foundTopic = this.topicRepository.findById(id)
-
-		return TopicOutputDto(foundTopic)
-	}
+	fun getTopicDetails(@PathVariable id: Long) = TopicOutputDto(this.topicRepository.findById(id))
 }
