@@ -1,8 +1,8 @@
 package br.com.alura.forum.model;
 
-import javax.persistence.*;
-
 import br.com.alura.forum.model.topic.domain.Topic;
+
+import javax.persistence.*;
 
 import java.time.Instant;
 

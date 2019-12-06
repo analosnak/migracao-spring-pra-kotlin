@@ -1,8 +1,8 @@
 package br.com.alura.forum.controller.dto.input;
 
+import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.data.jpa.domain.Specification;
 
-import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.model.topic.domain.TopicStatus;
 
 import javax.persistence.criteria.*;
