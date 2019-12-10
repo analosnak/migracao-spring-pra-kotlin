@@ -11,7 +11,7 @@ data class User private constructor(@Column(nullable = false, unique = true) val
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
-    var name: String? = null
+    var name: String = ""
     private set
 
     private lateinit var password: String

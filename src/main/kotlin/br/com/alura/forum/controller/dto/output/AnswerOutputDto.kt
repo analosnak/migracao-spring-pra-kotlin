@@ -8,7 +8,7 @@ class AnswerOutputDto(answer: Answer) {
     val content: String = answer.content
     val creationTime: Instant = answer.creationTime
     val solution: Boolean = answer.solution
-    val ownerName: String? = answer.owner.name
+    val ownerName: String = answer.owner.name
 
     companion object {
         fun listFromAnswers(answers: List<Answer>) = answers
