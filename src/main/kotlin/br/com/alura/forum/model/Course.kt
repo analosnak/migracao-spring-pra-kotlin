@@ -9,5 +9,6 @@ data class Course(val name: String,
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null
 
-    fun getCategoryName(): String = subcategory.category.orElseThrow{IllegalStateException("Esta já é uma categoria mãe")}.name
+    val categoryName: String
+            get() = subcategory.category.orElseThrow{IllegalStateException("Esta já é uma categoria mãe")}.name
 }

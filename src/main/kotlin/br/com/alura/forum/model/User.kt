@@ -17,7 +17,7 @@ data class User private constructor(@Column(nullable = false, unique = true) val
     private lateinit var password: String
 
     @ManyToMany(fetch = FetchType.EAGER)
-    val authorities: MutableList<Role> = ArrayList()
+    val authorities = mutableListOf<Role>()
 
     constructor(name: String,
                 email: String,

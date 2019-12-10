@@ -24,9 +24,9 @@ data class Topic(val shortDescription: String,
     var status: TopicStatus = TopicStatus.NOT_ANSWERED
     @OneToMany(mappedBy = "topic")
     @LazyCollection(LazyCollectionOption.EXTRA)
-    val answers: List<Answer> = ArrayList()
-
-    fun getNumberOfAnswers() = answers.size
+    val answers = listOf<Answer>()
+    val numberOfAnswers: Int
+        get() = answers.size
 
     fun addAnswer(answer: Answer) { answers + answer}
 
