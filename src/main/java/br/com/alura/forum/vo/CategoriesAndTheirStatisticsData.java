@@ -1,12 +1,12 @@
 package br.com.alura.forum.vo;
 
+import br.com.alura.forum.model.Category;
+
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
-
-import br.com.alura.forum.model.Category;
 
 public class CategoriesAndTheirStatisticsData {
 

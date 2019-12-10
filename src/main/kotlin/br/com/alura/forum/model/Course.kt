@@ -10,5 +10,5 @@ data class Course(val name: String,
     val id: Long? = null
 
     val categoryName: String
-            get() = subcategory.category.orElseThrow{IllegalStateException("Esta já é uma categoria mãe")}.name
+            get() = subcategory.category?.name ?: throw IllegalStateException("Esta já é uma categoria mãe")
 }

@@ -2,10 +2,10 @@ package br.com.alura.forum.service;
 
 import java.util.List;
 
+import br.com.alura.forum.model.Category;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.alura.forum.model.Category;
 import br.com.alura.forum.repository.CategoryRepository;
 import br.com.alura.forum.vo.CategoriesAndTheirStatisticsData;
 import br.com.alura.forum.vo.CategoryStatisticsData;
