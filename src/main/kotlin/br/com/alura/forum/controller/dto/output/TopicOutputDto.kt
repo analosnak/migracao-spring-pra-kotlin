@@ -12,7 +12,7 @@ class TopicOutputDto(topic: Topic) {
     val numberOfResponses: Int = topic.getNumberOfAnswers()
     val creationInstant: Instant = topic.creationInstant
     val lastUpdate: Instant = topic.lastUpdate
-    val ownerName: String = topic.owner.name
+    val ownerName: String? = topic.owner.name
     val courseName: String = topic.course.name
     val subcategoryName: String = topic.course.subcategoryName
     val categoryName: String = topic.course.categoryName

@@ -5,6 +5,7 @@ import java.net.URI;
 import javax.validation.Valid;
 
 import br.com.alura.forum.model.Answer;
+import br.com.alura.forum.model.User;
 import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.alura.forum.controller.dto.input.NewAnswerInputDto;
 import br.com.alura.forum.controller.dto.output.AnswerOutputDto;
-import br.com.alura.forum.model.User;
 import br.com.alura.forum.service.NewReplyProcessorService;
 
 @Controller

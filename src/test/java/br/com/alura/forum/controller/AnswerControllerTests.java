@@ -8,6 +8,7 @@ import java.net.URI;
 
 import javax.transaction.Transactional;
 
+import br.com.alura.forum.model.User;
 import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.TopicRepository;
 import org.hamcrest.CoreMatchers;
@@ -31,7 +32,6 @@ import org.springframework.web.util.UriTemplate;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import br.com.alura.forum.controller.dto.input.NewAnswerInputDto;
-import br.com.alura.forum.model.User;
 
 import br.com.alura.forum.repository.UserRepository;
 import br.com.alura.forum.security.jwt.TokenManager;

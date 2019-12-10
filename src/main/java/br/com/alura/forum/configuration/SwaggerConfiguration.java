@@ -2,11 +2,11 @@ package br.com.alura.forum.configuration;
 
 import java.util.Arrays;
 
+import br.com.alura.forum.model.User;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import br.com.alura.forum.model.User;
 import springfox.documentation.builders.ApiInfoBuilder;
 import springfox.documentation.builders.ParameterBuilder;
 import springfox.documentation.builders.PathSelectors;
