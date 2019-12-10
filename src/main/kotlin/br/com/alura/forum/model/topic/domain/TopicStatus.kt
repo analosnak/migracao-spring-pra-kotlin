@@ -2,7 +2,7 @@ package br.com.alura.forum.model.topic.domain
 
 import br.com.alura.forum.model.Answer
 
-enum class TopicStatus : TopicState {
+enum class TopicStatus {
     NOT_ANSWERED {
         override fun registerNewReply(topic: Topic, newReply: Answer) {
             if (topic.owner != newReply.owner) topic.status = NOT_SOLVED
@@ -39,5 +39,9 @@ enum class TopicStatus : TopicState {
         override fun close(topic: Topic) = throw RuntimeException("Essa dúvida já está fechada!")
 
         override fun markAsSolved(topic: Topic) = throw RuntimeException("A dúvida já está fechada!")
-    }
+    };
+
+    abstract fun registerNewReply(topic: Topic, newReply: Answer)
+    abstract fun markAsSolved(topic:Topic)
+    abstract fun close(topic: Topic)
 }
