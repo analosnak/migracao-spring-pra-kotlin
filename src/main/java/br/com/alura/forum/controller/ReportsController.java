@@ -2,13 +2,13 @@ package br.com.alura.forum.controller;
 
 import java.util.List;
 
+import br.com.alura.forum.model.OpenTopicByCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import br.com.alura.forum.model.OpenTopicByCategory;
 import br.com.alura.forum.repository.OpenTopicByCategoryRepository;
 
 @Controller
@@ -19,7 +19,7 @@ public class ReportsController {
 
 	@GetMapping("/open-topics-by-category")
 	public String showOpenTopicsByCategoryReport(Model model) {
-		List<OpenTopicByCategory> openTopics = 
+		List<OpenTopicByCategory> openTopics =
 				this.openTopicByCategoryReport.findAllByCurrentMonth();
 		openTopics.forEach(topic -> {
 			

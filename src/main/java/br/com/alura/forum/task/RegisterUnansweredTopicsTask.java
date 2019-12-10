@@ -2,12 +2,12 @@ package br.com.alura.forum.task;
 
 import java.util.List;
 
+import br.com.alura.forum.model.OpenTopicByCategory;
 import br.com.alura.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import br.com.alura.forum.model.OpenTopicByCategory;
 import br.com.alura.forum.repository.OpenTopicByCategoryRepository;
 
 @Component
