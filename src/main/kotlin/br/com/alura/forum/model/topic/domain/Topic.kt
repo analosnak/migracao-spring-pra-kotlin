@@ -11,7 +11,7 @@ import javax.persistence.*
 import javax.xml.ws.soap.MTOM
 
 @Entity
-class Topic(val shortDescription: String,
+data class Topic(val shortDescription: String,
             @Lob val content: String,
             @ManyToOne val owner: User,
             @ManyToOne val course: Course) {
