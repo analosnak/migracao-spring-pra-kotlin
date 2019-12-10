@@ -28,7 +28,7 @@ public class TopicBriefOutputDto {
 		this.secondsSinceLastUpdate = getSecondsSince(topic.getLastUpdate());
 		this.ownerName = topic.getOwner().getName();
 		this.courseName = topic.getCourse().getName();
-		this.subcategoryName = topic.getCourse().getSubcategoryName();
+		this.subcategoryName = topic.getCourse().getSubcategory().getName();
 		this.categoryName = topic.getCourse().getCategoryName();
 		this.numberOfResponses = topic.getNumberOfAnswers();
 		this.solved = TopicStatus.SOLVED.equals(topic.getStatus());

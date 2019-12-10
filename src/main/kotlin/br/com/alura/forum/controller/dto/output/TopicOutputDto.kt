@@ -14,8 +14,8 @@ class TopicOutputDto(topic: Topic) {
     val lastUpdate: Instant = topic.lastUpdate
     val ownerName: String = topic.owner.name
     val courseName: String = topic.course.name
-    val subcategoryName: String = topic.course.subcategoryName
-    val categoryName: String = topic.course.categoryName
+    val subcategoryName: String = topic.course.subcategory.name
+    val categoryName: String = topic.course.getCategoryName()
     private val answers: MutableList<AnswerOutputDto> = ArrayList()
 
     fun getAnswers(): List<AnswerOutputDto> {
