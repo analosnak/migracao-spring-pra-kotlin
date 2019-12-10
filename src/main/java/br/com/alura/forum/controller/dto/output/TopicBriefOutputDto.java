@@ -7,9 +7,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import br.com.alura.forum.model.topic.domain.Topic;
-import org.springframework.data.domain.Page;
-
 import br.com.alura.forum.model.topic.domain.TopicStatus;
+import org.springframework.data.domain.Page;
 
 public class TopicBriefOutputDto {
 

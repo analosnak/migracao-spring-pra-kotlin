@@ -28,7 +28,7 @@ data class Topic(val shortDescription: String,
 
     fun getNumberOfAnswers() = answers.size
 
-    fun addAnswer(answer: Answer) = answers + answer
+    fun addAnswer(answer: Answer) { answers + answer}
 
     fun registerNewReply(newReply: Answer) {
         Assert.notNull(newReply, "Nova resposta não pode ser nula")
