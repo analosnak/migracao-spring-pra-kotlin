@@ -1,5 +1,6 @@
 package br.com.alura.forum.service.infra;
 
+import br.com.alura.forum.model.Answer;
 import br.com.alura.forum.model.topic.domain.Topic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.forum.infra.NewReplyMailFactory;
-import br.com.alura.forum.model.Answer;
 
 @Service
 public class ForumMailService {

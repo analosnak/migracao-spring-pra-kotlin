@@ -3,13 +3,12 @@ package br.com.alura.forum.infra;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+import br.com.alura.forum.model.Answer;
 import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
-
-import br.com.alura.forum.model.Answer;
 
 @Component
 public class NewReplyMailFactory {
@@ -24,7 +23,7 @@ public class NewReplyMailFactory {
                 answeredTopic.getOwner().getName());
         thymeleafContext.setVariable("topicShortDescription", 
                 answeredTopic.getShortDescription());
-        thymeleafContext.setVariable("answerAuthor", answer.getOwnerName());
+        thymeleafContext.setVariable("answerAuthor", answer.getOwner().getName());
         thymeleafContext.setVariable("answerCreationInstant", 
                 getFormattedCreationTime(answer));
         thymeleafContext.setVariable("answerContent", answer.getContent());

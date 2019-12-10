@@ -1,9 +1,9 @@
 package br.com.alura.forum.service;
 
+import br.com.alura.forum.model.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.alura.forum.model.Answer;
 import br.com.alura.forum.repository.AnswerRepository;
 import br.com.alura.forum.service.infra.ForumMailService;
 
