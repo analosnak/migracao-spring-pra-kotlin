@@ -10,7 +10,7 @@ data class Role(@Id private val authority: String) : GrantedAuthority {
     override fun getAuthority() = authority
 
     companion object {
-        const val ROLE_ALUNO = "ROLE_ALUNO"
-        const val ROLE_ADMIN = "ROLE_ADMIN"
+        const val ALUNO = "ROLE_ALUNO"
+        const val ADMIN = "ROLE_ADMIN"
     }
 }

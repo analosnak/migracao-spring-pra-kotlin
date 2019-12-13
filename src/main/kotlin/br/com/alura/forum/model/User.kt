@@ -28,7 +28,7 @@ data class User private constructor(@Column(nullable = false, unique = true) val
 
     fun isOwnerOf(topic: Topic) = this == topic.owner
 
-    fun isAdmin() = authorities.any { role -> role.authority == Role.ROLE_ADMIN }
+    fun isAdmin() = authorities.any { role -> role.authority == Role.ADMIN }
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> = authorities
 

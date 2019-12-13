@@ -10,8 +10,6 @@ import org.springframework.data.repository.query.Param
 import java.time.Instant
 
 interface TopicRepository : Repository<Topic, Long>, JpaSpecificationExecutor<Topic> {
-    @Query("select t from Topic t")
-    fun list(): List<Topic>
 
     fun findAll(): List<Topic>
 

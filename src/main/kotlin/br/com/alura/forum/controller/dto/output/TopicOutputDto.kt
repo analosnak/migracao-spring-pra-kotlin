@@ -16,13 +16,5 @@ class TopicOutputDto(topic: Topic) {
     val courseName: String = topic.course.name
     val subcategoryName: String = topic.course.subcategory.name
     val categoryName: String = topic.course.categoryName
-    private val _answers = mutableListOf<AnswerOutputDto>()
-    val answers: List<AnswerOutputDto>
-        get() = this._answers
-
-
-    init {
-        val answers = AnswerOutputDto.listFromAnswers(topic.answers)
-        this._answers.addAll(answers)
-    }
+    val answers: List<AnswerOutputDto> = AnswerOutputDto.listFromAnswers(topic.answers)
 }

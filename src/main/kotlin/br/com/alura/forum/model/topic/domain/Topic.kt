@@ -5,10 +5,8 @@ import br.com.alura.forum.model.Course
 import br.com.alura.forum.model.User
 import org.hibernate.annotations.LazyCollection
 import org.hibernate.annotations.LazyCollectionOption
-import org.springframework.util.Assert
 import java.time.Instant
 import javax.persistence.*
-import javax.xml.ws.soap.MTOM
 
 @Entity
 data class Topic(val shortDescription: String,
@@ -30,17 +28,9 @@ data class Topic(val shortDescription: String,
 
     fun addAnswer(answer: Answer) { answers + answer}
 
-    fun registerNewReply(newReply: Answer) {
-        Assert.notNull(newReply, "Nova resposta não pode ser nula")
+    fun registerNewReply(newReply: Answer) = status.registerNewReply(this, newReply)
 
-        status.registerNewReply(this, newReply)
-    }
-
-    fun markAsSolved(solution: Answer) {
-        Assert.notNull(solution, "A resposta de solução não pode ser nula")
-
-        status.markAsSolved(this)
-    }
+    fun markAsSolved() = status.markAsSolved(this)
 
     fun close() = status.close(this)
 }

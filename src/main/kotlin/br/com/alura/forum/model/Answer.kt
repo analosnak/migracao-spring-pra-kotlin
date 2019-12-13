@@ -23,6 +23,6 @@ data class Answer(@Lob val content: String,
 
     fun markAsSolution() {
         this.solution = true
-        this.topic.markAsSolved(this)
+        this.topic.markAsSolved()
     }
 }
