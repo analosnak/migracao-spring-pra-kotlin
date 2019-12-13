@@ -3,11 +3,11 @@ package br.com.alura.forum.service;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
+import br.com.alura.forum.model.Category;
+import br.com.alura.forum.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.alura.forum.model.Category;
-import br.com.alura.forum.repository.TopicRepository;
 import br.com.alura.forum.vo.CategoryStatisticsData;
 
 @Service

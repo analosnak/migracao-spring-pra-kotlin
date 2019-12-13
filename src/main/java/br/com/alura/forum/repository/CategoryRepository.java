@@ -2,9 +2,8 @@ package br.com.alura.forum.repository;
 
 import java.util.List;
 
-import org.springframework.data.repository.Repository;
-
 import br.com.alura.forum.model.Category;
+import org.springframework.data.repository.Repository;
 
 public interface CategoryRepository extends Repository<Category, Long> {
 

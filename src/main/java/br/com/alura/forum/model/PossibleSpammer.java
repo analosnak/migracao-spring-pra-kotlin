@@ -1,10 +1,10 @@
 package br.com.alura.forum.model;
 
+import br.com.alura.forum.model.topic.domain.Topic;
+
 import java.time.Duration;
 import java.time.Instant;
 import java.util.List;
-
-import br.com.alura.forum.model.topic.domain.Topic;
 
 public class PossibleSpammer {
 

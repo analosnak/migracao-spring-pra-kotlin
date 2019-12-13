@@ -6,6 +6,9 @@ import java.util.List;
 import javax.validation.Valid;
 
 import br.com.alura.forum.controller.dto.output.TopicOutputDto;
+import br.com.alura.forum.model.User;
+import br.com.alura.forum.model.topic.domain.Topic;
+import br.com.alura.forum.repository.TopicRepository;
 import br.com.alura.forum.validator.NewTopicCustomValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -24,10 +27,7 @@ import br.com.alura.forum.controller.dto.input.NewTopicInputDto;
 import br.com.alura.forum.controller.dto.input.TopicSearchInputDto;
 import br.com.alura.forum.controller.dto.output.TopicBriefOutputDto;
 import br.com.alura.forum.controller.dto.output.TopicDashboardItemOutputDto;
-import br.com.alura.forum.model.User;
-import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.repository.CourseRepository;
-import br.com.alura.forum.repository.TopicRepository;
 import br.com.alura.forum.service.DashboardDataProcessingService;
 import br.com.alura.forum.vo.CategoriesAndTheirStatisticsData;
 
@@ -64,7 +64,7 @@ public class TopicController {
     
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TopicOutputDto> createTopic(@RequestBody @Valid NewTopicInputDto newTopicDto,
-		    @AuthenticationPrincipal User loggedUser, UriComponentsBuilder uriBuilder) {
+                                                      @AuthenticationPrincipal User loggedUser, UriComponentsBuilder uriBuilder) {
 
         Topic topic = newTopicDto.build(loggedUser, this.courseRepository);
         this.topicRepository.save(topic);
@@ -80,10 +80,4 @@ public class TopicController {
         binder.addValidators(new NewTopicCustomValidator(this.topicRepository, loggedUser));
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public TopicOutputDto getTopicDetails(@PathVariable Long id) {
-
-        Topic foundTopic = this.topicRepository.findById(id);
-        return new TopicOutputDto(foundTopic);
-    }
 }

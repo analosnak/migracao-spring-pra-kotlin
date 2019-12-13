@@ -2,11 +2,11 @@ package br.com.alura.forum.security.jwt;
 
 import java.util.Date;
 
+import br.com.alura.forum.model.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 
-import br.com.alura.forum.model.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

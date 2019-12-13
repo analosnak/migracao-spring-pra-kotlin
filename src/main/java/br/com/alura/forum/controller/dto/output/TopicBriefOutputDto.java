@@ -6,10 +6,9 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import org.springframework.data.domain.Page;
-
 import br.com.alura.forum.model.topic.domain.Topic;
 import br.com.alura.forum.model.topic.domain.TopicStatus;
+import org.springframework.data.domain.Page;
 
 public class TopicBriefOutputDto {
 
@@ -29,7 +28,7 @@ public class TopicBriefOutputDto {
 		this.secondsSinceLastUpdate = getSecondsSince(topic.getLastUpdate());
 		this.ownerName = topic.getOwner().getName();
 		this.courseName = topic.getCourse().getName();
-		this.subcategoryName = topic.getCourse().getSubcategoryName();
+		this.subcategoryName = topic.getCourse().getSubcategory().getName();
 		this.categoryName = topic.getCourse().getCategoryName();
 		this.numberOfResponses = topic.getNumberOfAnswers();
 		this.solved = TopicStatus.SOLVED.equals(topic.getStatus());
