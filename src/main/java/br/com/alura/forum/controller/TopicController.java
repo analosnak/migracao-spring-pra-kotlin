@@ -43,16 +43,6 @@ public class TopicController {
 
 	@Autowired
 	private CourseRepository courseRepository;
-	
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public Page<TopicBriefOutputDto> listTopics(TopicSearchInputDto topicSearch,
-            @PageableDefault(sort = "creationInstant", direction = Sort.Direction.DESC) Pageable pageRequest) {
-
-        Specification<Topic> topicSearchSpecification = topicSearch.build();
-        Page<Topic> topics = this.topicRepository.findAll(topicSearchSpecification, pageRequest);
-
-        return TopicBriefOutputDto.listFromTopics(topics);
-    }
  
     @GetMapping(value = "/dashboard", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<TopicDashboardItemOutputDto> getDashboardInfo() {
