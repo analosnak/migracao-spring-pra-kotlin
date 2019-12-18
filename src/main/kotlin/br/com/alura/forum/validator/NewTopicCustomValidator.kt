@@ -22,7 +22,7 @@ class NewTopicCustomValidator(private val topicRepository: TopicRepository,
 
         val possibleSpammer = PossibleSpammer(topics)
 
-        if (possibleSpammer.hasTopicLimitExceeded()) {
+        if (possibleSpammer.hasTopicLimitExceeded) {
             val minutesToNextTopic = possibleSpammer.minutesToNextTopic(oneHourAgo)
 
             errors.reject("newTopicInputDto.limit.exceeded",
