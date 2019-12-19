@@ -14,11 +14,6 @@ class ReportsController(private val openTopicByCategoryRepository: OpenTopicByCa
     fun showOpenTopicsByCategoryReport(model: Model): String {
         val openTopics = this.openTopicByCategoryRepository.findAllByCurrentMonth()
 
-        openTopics.forEach {
-            print(it.id)
-            print(it.categoryName)
-        }
-
         model.addAttribute("openTopics", openTopics)
 
         return "report"
