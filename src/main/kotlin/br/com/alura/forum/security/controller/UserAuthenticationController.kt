@@ -22,16 +22,14 @@ class UserAuthenticationController(private val authManager: AuthenticationManage
     fun authenticate(@RequestBody loginInfo: LoginInputDto): ResponseEntity<AuthenticationTokenOutputDto> {
         val authenticationToken = loginInfo.build()
 
-        return try {
+        try {
             val authentication = authManager.authenticate(authenticationToken)
             val jwtToken = tokenManager.generateToken(authentication)
 
             val tokenOutputDto = AuthenticationTokenOutputDto("Bearer", jwtToken)
-
-            ResponseEntity.ok(tokenOutputDto)
+            return ResponseEntity.ok(tokenOutputDto)
         } catch (e: AuthenticationException) {
-
-            ResponseEntity.badRequest().build()
+            return ResponseEntity.badRequest().build()
         }
     }
 }
