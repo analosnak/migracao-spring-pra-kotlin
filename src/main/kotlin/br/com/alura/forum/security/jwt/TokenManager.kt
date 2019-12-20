@@ -40,7 +40,7 @@ class TokenManager(
         false
     }
 
-    fun getUserIdFromToken(jwt: String): Long {
+    fun getUserIdFromToken(jwt: String?): Long {
         val claims = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(jwt).body
 
         return claims.subject.toLong()
