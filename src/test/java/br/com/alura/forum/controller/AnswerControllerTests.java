@@ -84,9 +84,8 @@ public class AnswerControllerTests {
 	public void shouldProcessSuccessfullyNewAnswerRequest() throws Exception {
 		URI uri = new UriTemplate(ENDPOINT).expand(this.topicId);
 		
-		NewAnswerInputDto newAnswerInputDto = new NewAnswerInputDto();
-		newAnswerInputDto.setContent("Não consigo subir servidor");
-		
+		NewAnswerInputDto newAnswerInputDto = new NewAnswerInputDto("Não consigo subir servidor");
+
 		MockHttpServletRequestBuilder request = post(uri)
 				.contentType(MediaType.APPLICATION_JSON)
 				.header("Authorization", "Bearer " + this.jwt)
@@ -102,9 +101,8 @@ public class AnswerControllerTests {
 	public void shouldRejectNewAnswerRequest() throws Exception {
 		URI uri = new UriTemplate(ENDPOINT).expand(this.topicId);
 
-		NewAnswerInputDto newAnswerInputDto = new NewAnswerInputDto();
-		newAnswerInputDto.setContent("bad");
-		
+		NewAnswerInputDto newAnswerInputDto = new NewAnswerInputDto("bad");
+
 		MockHttpServletRequestBuilder request = post(uri)
 				.contentType(MediaType.APPLICATION_JSON)
 				.header("Authorization", "Bearer " + this.jwt)
