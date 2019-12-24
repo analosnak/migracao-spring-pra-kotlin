@@ -9,7 +9,7 @@ import javax.persistence.criteria.Predicate
 import javax.persistence.criteria.Root
 
 class TopicSearchInputDto(private val status: TopicStatus?, private val categoryName: String?) {
-    fun build(): Specification<Topic> = Specification<Topic> { root: Root<Topic>, _, criteriaBuilder ->
+    fun build() = Specification<Topic> { root: Root<Topic>, _, criteriaBuilder ->
         val predicates = mutableListOf<Predicate>()
 
         status?.let {
