@@ -23,6 +23,6 @@ class CategoryStatisticsDataLoadingService(private val topicRepository: TopicRep
 
             return CategoryStatisticsData(allTopics, lastWeekTopics, unansweredTopics)
         }
-        throw IllegalStateException("O id da Categoria não pode ser nulo nesse momento")
+        error("O id da Categoria não pode ser nulo nesse momento")
     }
 }
