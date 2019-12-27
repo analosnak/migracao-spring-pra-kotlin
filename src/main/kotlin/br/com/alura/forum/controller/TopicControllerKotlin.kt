@@ -57,7 +57,7 @@ class TopicControllerKotlin(val topicRepository: TopicRepository,
 	}
 
 	@GetMapping("dashboard", produces = [MediaType.APPLICATION_JSON_VALUE])
-	fun getDashboardInfo(): List<TopicDashboardItemOutputDto> {
+	fun getDashboardInfo(): List<TopicDashboardItemOutputDto?> {
 		val categoriesAndTheirStatisticsData = this.dashboardDataProcessingService.execute()
 		return TopicDashboardItemOutputDto.listFromCategories(categoriesAndTheirStatisticsData)
 	}
