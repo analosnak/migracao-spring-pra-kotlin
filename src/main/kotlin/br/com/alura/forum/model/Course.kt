@@ -11,8 +11,7 @@ data class Course(val name: String,
 
     val categoryName: String
         get() {
-            val category: Category? = subcategory.category
-            category ?: throw IllegalStateException("Esta já é uma categoria mãe")
+            val category = checkNotNull(subcategory.category) { "Esta já é uma categoria mãe" }
 
             return category.name
         }
