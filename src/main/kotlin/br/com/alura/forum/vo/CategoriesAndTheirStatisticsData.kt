@@ -10,8 +10,5 @@ class CategoriesAndTheirStatisticsData {
     }
 
     fun <R> map(extractorFunction: (category: Category, statData: CategoryStatisticsData) -> R): List<R?> =
-            this.categoriesAndTheirStats.keys.map { category ->
-                this.categoriesAndTheirStats[category]?.let { statisticsData ->
-                    extractorFunction(category, statisticsData) }
-            }
+            this.categoriesAndTheirStats.map { extractorFunction(it.key, it.value) }
 }
