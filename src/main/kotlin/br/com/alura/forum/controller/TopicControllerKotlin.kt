@@ -3,11 +3,13 @@ package br.com.alura.forum.controller
 import br.com.alura.forum.controller.dto.input.NewTopicInputDto
 import br.com.alura.forum.controller.dto.input.TopicSearchInputDto
 import br.com.alura.forum.controller.dto.output.TopicBriefOutputDto
+import br.com.alura.forum.controller.dto.output.TopicDashboardItemOutputDto
 import br.com.alura.forum.controller.dto.output.TopicOutputDto
 import br.com.alura.forum.model.User
 import br.com.alura.forum.model.topic.domain.Topic
 import br.com.alura.forum.repository.CourseRepository
 import br.com.alura.forum.repository.TopicRepository
+import br.com.alura.forum.service.DashboardDataProcessingService
 import br.com.alura.forum.validator.NewTopicCustomValidator
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
@@ -24,8 +26,10 @@ import javax.validation.Valid
 
 @RestController
 @RequestMapping("/api/topics")
-class TopicControllerKotlin(val topicRepository: TopicRepository, val courseRepository: CourseRepository) {
-	@GetMapping(value = ["/{id}"], produces = [MediaType.APPLICATION_JSON_VALUE])
+class TopicControllerKotlin(val topicRepository: TopicRepository,
+							val courseRepository: CourseRepository,
+							val dashboardDataProcessingService: DashboardDataProcessingService) {
+	@GetMapping("/{id}", produces = [MediaType.APPLICATION_JSON_VALUE])
 	fun getTopicDetails(@PathVariable id: Long) = TopicOutputDto(this.topicRepository.findById(id))
 
 	@GetMapping(produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -51,6 +55,13 @@ class TopicControllerKotlin(val topicRepository: TopicRepository, val courseRepo
 
 		return ResponseEntity.created(path).body(TopicOutputDto(topic))
 	}
+
+	@GetMapping("dashboard", produces = [MediaType.APPLICATION_JSON_VALUE])
+	fun getDashboardInfo(): List<TopicDashboardItemOutputDto?> {
+		val categoriesAndTheirStatisticsData = this.dashboardDataProcessingService.execute()
+		return TopicDashboardItemOutputDto.listFromCategories(categoriesAndTheirStatisticsData)
+	}
+
 
 	@InitBinder("newTopicInputDto")
 	fun initBinder(binder: WebDataBinder, @AuthenticationPrincipal loggedUser: User) {
