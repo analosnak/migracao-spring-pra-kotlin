@@ -2,6 +2,7 @@ package br.com.alura.forum.repository.setup;
 
 import br.com.alura.forum.model.Category;
 import br.com.alura.forum.model.Course;
+import br.com.alura.forum.model.User;
 import br.com.alura.forum.model.topic.domain.Topic;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
@@ -31,9 +32,11 @@ public class TopicRepositoryTestsSetup {
         Course js46 = this.testEntityManager
                 .persist(new Course("React", javaScript));
 
-        Topic springTopic = new Topic("Tópico Spring", "Conteúdo do tópico", null, fj27);
-        Topic servletTopic = new Topic("Tópico Servlet", "Conteúdo do tópico", null, fj21);
-        Topic reactTopic = new Topic("Tópico React", "Conteúdo do tópico", null, js46);
+        User owner = this.testEntityManager
+                .persist(new User("ana", "a@b.c", "senha"));
+        Topic springTopic = new Topic("Tópico Spring", "Conteúdo do tópico", owner, fj27);
+        Topic servletTopic = new Topic("Tópico Servlet", "Conteúdo do tópico", owner, fj21);
+        Topic reactTopic = new Topic("Tópico React", "Conteúdo do tópico", owner, js46);
 
         this.testEntityManager.persist(springTopic);
         this.testEntityManager.persist(servletTopic);
