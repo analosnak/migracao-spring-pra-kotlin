@@ -38,5 +38,11 @@ class CategoryStatisticsDataLoadingServiceTests @Autowired constructor(
         assertEquals(allTopics, statsData.allTopics)
         assertEquals(lastWeekTopics, statsData.lastWeekTopics)
         assertEquals(unansweredTopics, statsData.unansweredTopics)
+
+        verify {
+            topicRepository.countLastWeekTopicsByCategoryId(1, any())
+            topicRepository.countTopicsByCategoryId(1)
+            topicRepository.countUnansweredTopicsByCategoryId(1)
+        }
     }
 }
