@@ -29,7 +29,7 @@ class ForumMailService(private val mailSender: JavaMailSender,
         try {
             mailSender.send(messagePreparator)
         } catch (e: MailException) {
-            logger.error("Não foi possível enviar email para ${answer.topic.owner.email}", e.message)
+            logger.error("Não foi possível enviar email para ${answeredTopic.owner.email}", e.message)
         }
     }
 
