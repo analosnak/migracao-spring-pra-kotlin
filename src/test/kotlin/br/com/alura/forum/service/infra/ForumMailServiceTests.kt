@@ -2,24 +2,12 @@ package br.com.alura.forum.service.infra
 
 import br.com.alura.forum.infra.NewReplyMailFactory
 import br.com.alura.forum.model.Answer
-import com.ninjasquad.springmockk.MockkBean
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.mail.javamail.JavaMailSender
 import org.springframework.mail.javamail.MimeMessagePreparator
-import org.springframework.test.context.ActiveProfiles
 
-@ActiveProfiles("test")
-@SpringBootTest
-class ForumMailServiceTests @Autowired constructor(val forumMailService: ForumMailService) {
-    @MockkBean
-    private lateinit var mailSender: JavaMailSender
-    @MockkBean
-    private lateinit var newReplyMailFactory: NewReplyMailFactory
+class ForumMailServiceTests {
 
     @Test
     fun `When sendNewReplyMailAsync then send email`() {
@@ -32,11 +20,14 @@ class ForumMailServiceTests @Autowired constructor(val forumMailService: ForumMa
             }
         }
 
-        every { newReplyMailFactory.generateNewReplyMailContent(answer) } returns "Conteúdo do e-mail"
+        val mailSender = mockk<JavaMailSender>()
+        every { mailSender.send(any<MimeMessagePreparator>()) } just Runs
 
+        val newReplyMailFactory = mockk<NewReplyMailFactory>()
+
+        val forumMailService = ForumMailService(mailSender, newReplyMailFactory)
         forumMailService.sendNewReplyMailAsync(answer)
 
         verify { mailSender.send(any<MimeMessagePreparator>()) }
-        verify { newReplyMailFactory.generateNewReplyMailContent(answer) }
     }
 }
