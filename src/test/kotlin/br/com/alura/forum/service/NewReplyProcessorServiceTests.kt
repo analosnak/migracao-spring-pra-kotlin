@@ -3,20 +3,19 @@ package br.com.alura.forum.service
 import br.com.alura.forum.model.Answer
 import br.com.alura.forum.repository.AnswerRepository
 import br.com.alura.forum.service.infra.ForumMailService
-import com.ninjasquad.springmockk.MockkBean
 import io.mockk.*
+import io.mockk.impl.annotations.MockK
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
-class NewReplyProcessorServiceTests(
-        @Autowired private val newReplyProcessorService: NewReplyProcessorService
-) {
-    @MockkBean
+class NewReplyProcessorServiceTests {
+    @MockK
     private lateinit var answerRepository: AnswerRepository
-    @MockkBean
+    @MockK
     private lateinit var forumMailService: ForumMailService
+
+    @BeforeEach
+    fun setup() = MockKAnnotations.init(this)
 
     @Test
     fun `When execute then save before send email`() {
@@ -25,6 +24,7 @@ class NewReplyProcessorServiceTests(
         every { answerRepository.save(answer) } returns answer
         every { forumMailService.sendNewReplyMailAsync(answer) } just Runs
 
+        val newReplyProcessorService = NewReplyProcessorService(answerRepository, forumMailService)
         newReplyProcessorService.execute(answer)
 
         verifyOrder {

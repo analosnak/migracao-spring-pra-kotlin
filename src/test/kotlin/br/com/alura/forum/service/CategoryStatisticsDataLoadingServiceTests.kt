@@ -2,22 +2,21 @@ package br.com.alura.forum.service
 
 import br.com.alura.forum.model.Category
 import br.com.alura.forum.repository.TopicRepository
-import com.ninjasquad.springmockk.MockkBean
+import io.mockk.MockKAnnotations
 import io.mockk.every
+import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import io.mockk.verify
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
 
-@SpringBootTest
-class CategoryStatisticsDataLoadingServiceTests @Autowired constructor(
-        val categoryStatsService: CategoryStatisticsDataLoadingService
-) {
-    @MockkBean
-    private lateinit var topicRepository: TopicRepository
+class CategoryStatisticsDataLoadingServiceTests {
+    @MockK
+    lateinit var topicRepository: TopicRepository
+
+    @BeforeEach
+    fun setup() = MockKAnnotations.init(this)
 
     @Test
     fun `When load then return CategoryStatisticsData`() {
@@ -33,6 +32,7 @@ class CategoryStatisticsDataLoadingServiceTests @Autowired constructor(
         every { topicRepository.countLastWeekTopicsByCategoryId(1, any()) } returns lastWeekTopics
         every { topicRepository.countUnansweredTopicsByCategoryId(1) } returns unansweredTopics
 
+        val categoryStatsService = CategoryStatisticsDataLoadingService(topicRepository)
         val statsData = categoryStatsService.load(category)
 
         assertEquals(allTopics, statsData.allTopics)
