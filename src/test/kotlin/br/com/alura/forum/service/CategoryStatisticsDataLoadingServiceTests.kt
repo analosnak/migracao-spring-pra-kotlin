@@ -10,6 +10,8 @@ import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 
 class CategoryStatisticsDataLoadingServiceTests {
     @MockK
@@ -27,20 +29,21 @@ class CategoryStatisticsDataLoadingServiceTests {
         val allTopics = 5
         val lastWeekTopics = 1
         val unansweredTopics = 4
+        val lastWeek = Instant.now().minus(7, ChronoUnit.DAYS)
 
         every { topicRepository.countTopicsByCategoryId(1) } returns allTopics
         every { topicRepository.countLastWeekTopicsByCategoryId(1, any()) } returns lastWeekTopics
         every { topicRepository.countUnansweredTopicsByCategoryId(1) } returns unansweredTopics
 
         val categoryStatsService = CategoryStatisticsDataLoadingService(topicRepository)
-        val statsData = categoryStatsService.load(category)
+        val statsData = categoryStatsService.load(category, lastWeek)
 
         assertEquals(allTopics, statsData.allTopics)
         assertEquals(lastWeekTopics, statsData.lastWeekTopics)
         assertEquals(unansweredTopics, statsData.unansweredTopics)
 
         verify {
-            topicRepository.countLastWeekTopicsByCategoryId(1, any())
+            topicRepository.countLastWeekTopicsByCategoryId(1, lastWeek)
             topicRepository.countTopicsByCategoryId(1)
             topicRepository.countUnansweredTopicsByCategoryId(1)
         }
