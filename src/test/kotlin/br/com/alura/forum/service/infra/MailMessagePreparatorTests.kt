@@ -2,6 +2,10 @@ package br.com.alura.forum.service.infra
 
 import br.com.alura.forum.infra.NewReplyMailFactory
 import br.com.alura.forum.model.Answer
+import br.com.alura.forum.model.Category
+import br.com.alura.forum.model.Course
+import br.com.alura.forum.model.User
+import br.com.alura.forum.model.topic.domain.Topic
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
@@ -20,14 +24,13 @@ class MailMessagePreparatorTests {
 
     @Test
     fun `When prepare e-mail then put correct infos`() {
-        val answer = mockk<Answer> {
-            every { topic } returns mockk {
-                every { owner } returns mockk {
-                    every { email } returns "aluno@gmail.com"
-                }
-                every { shortDescription } returns "Descricao do tópico"
-            }
-        }
+        val category = Category("Programação")
+        val subcategory = Category("Java", category)
+        val course = Course("Java Web", subcategory)
+
+        val user = User("Aluno", "aluno@gmail.com", "123456")
+        val topic = Topic("Descricao do tópico", "Conteúdo do tópico", user, course)
+        val answer = Answer("Conteúdo da resposta", topic, user)
 
         every { newReplyMailFactory.generateNewReplyMailContent(answer) } returns "Conteúdo do e-mail"
 
