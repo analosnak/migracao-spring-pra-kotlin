@@ -32,7 +32,7 @@ class CategoryStatisticsDataLoadingServiceTests {
         val lastWeek = Instant.now().minus(7, ChronoUnit.DAYS)
 
         every { topicRepository.countTopicsByCategoryId(1) } returns allTopics
-        every { topicRepository.countLastWeekTopicsByCategoryId(1, any()) } returns lastWeekTopics
+        every { topicRepository.countLastWeekTopicsByCategoryId(1, lastWeek) } returns lastWeekTopics
         every { topicRepository.countUnansweredTopicsByCategoryId(1) } returns unansweredTopics
 
         val categoryStatsService = CategoryStatisticsDataLoadingService(topicRepository)
