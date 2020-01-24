@@ -7,9 +7,10 @@ import br.com.alura.forum.vo.CategoryStatisticsData
 import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import io.mockk.impl.annotations.RelaxedMockK
-import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 
 class DashboardDataProcessingServiceTests{
     @MockK
@@ -34,17 +35,19 @@ class DashboardDataProcessingServiceTests{
                 mobile
         )
 
+        val lastWeek = Instant.now().minus(7, ChronoUnit.DAYS)
+
         val programacaoStatisticsData = CategoryStatisticsData(5, 1, 5)
-        every { categoryStatisticsService.load(programacao, any()) } returns programacaoStatisticsData
+        every { categoryStatisticsService.load(programacao, lastWeek) } returns programacaoStatisticsData
 
         val frontStatisticsData = CategoryStatisticsData(3, 2, 0)
-        every { categoryStatisticsService.load(front, any()) } returns frontStatisticsData
+        every { categoryStatisticsService.load(front, lastWeek) } returns frontStatisticsData
 
         val mobileStatisticsData = CategoryStatisticsData(2, 0, 1)
-        every { categoryStatisticsService.load(mobile, any()) } returns mobileStatisticsData
+        every { categoryStatisticsService.load(mobile, lastWeek) } returns mobileStatisticsData
 
         val dashboardService = DashboardDataProcessingService(categoryRepository, categoryStatisticsService, categoriesAndTheirData)
-        val categoriesAndTheirData = dashboardService.execute()
+        val categoriesAndTheirData = dashboardService.execute(lastWeek)
 
         verify {
             categoriesAndTheirData.add(programacao, programacaoStatisticsData)

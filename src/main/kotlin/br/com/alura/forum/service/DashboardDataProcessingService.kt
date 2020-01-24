@@ -13,10 +13,8 @@ class DashboardDataProcessingService(
         private val categoriesAndTheirData: CategoriesAndTheirStatisticsData
 ) {
 
-    fun execute(): CategoriesAndTheirStatisticsData {
+    fun execute(lastWeek: Instant): CategoriesAndTheirStatisticsData {
         val principalCategories = categoryRepository.findByCategoryIsNull()
-
-        val lastWeek = Instant.now().minus(7, ChronoUnit.DAYS)
 
         principalCategories.forEach {
             categoriesAndTheirData.add(it, categoryStatisticsService.load(it, lastWeek))
