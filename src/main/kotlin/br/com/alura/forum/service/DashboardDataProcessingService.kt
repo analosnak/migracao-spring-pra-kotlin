@@ -9,11 +9,12 @@ import java.time.temporal.ChronoUnit
 @Service
 class DashboardDataProcessingService(
         private val categoryRepository: CategoryRepository,
-        private val categoryStatisticsService: CategoryStatisticsDataLoadingService,
-        private val categoriesAndTheirData: CategoriesAndTheirStatisticsData
+        private val categoryStatisticsService: CategoryStatisticsDataLoadingService
 ) {
 
     fun execute(lastWeek: Instant): CategoriesAndTheirStatisticsData {
+        val categoriesAndTheirData = CategoriesAndTheirStatisticsData()
+
         val principalCategories = categoryRepository.findByCategoryIsNull()
 
         principalCategories.forEach {
