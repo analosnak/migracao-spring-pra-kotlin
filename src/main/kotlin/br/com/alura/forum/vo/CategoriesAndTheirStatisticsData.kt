@@ -1,7 +1,9 @@
 package br.com.alura.forum.vo
 
 import br.com.alura.forum.model.Category
+import org.springframework.stereotype.Component
 
+@Component
 class CategoriesAndTheirStatisticsData {
     private val categoriesAndTheirStats: MutableMap<Category, CategoryStatisticsData> = mutableMapOf()
 

@@ -16,14 +16,9 @@ class ForumMailService(private val mailSender: JavaMailSender,
 
     @Async
     fun sendNewReplyMailAsync(answer: Answer) {
-        val answeredTopic = answer.topic
 
-        val messagePreparator = MimeMessagePreparator { mimeMessage ->
-            val messageHelper = MimeMessageHelper(mimeMessage)
-            messageHelper.setTo(answeredTopic.owner.email)
-            messageHelper.setSubject("Novo comentário em: ${answeredTopic.shortDescription}")
-            val messageContent = this.newReplyMailFactory.generateNewReplyMailContent(answer)
-            messageHelper.setText(messageContent, true)
+        val messagePreparator = MimeMessagePreparator {
+            prepare(answer, MimeMessageHelper(it), newReplyMailFactory)
         }
 
         try {

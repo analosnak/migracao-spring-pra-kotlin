@@ -10,13 +10,12 @@ import java.time.temporal.ChronoUnit
 @Service
 class CategoryStatisticsDataLoadingService(private val topicRepository: TopicRepository) {
 
-    fun load(category: Category): CategoryStatisticsData {
+    fun load(category: Category, startInstant: Instant): CategoryStatisticsData {
         category.id?.let {
         val allTopics = this.topicRepository.countTopicsByCategoryId(category.id)
 
-        val lastWeek = Instant.now().minus(7, ChronoUnit.DAYS)
         val lastWeekTopics = this.topicRepository
-                .countLastWeekTopicsByCategoryId(category.id, lastWeek)
+                .countLastWeekTopicsByCategoryId(category.id, startInstant)
 
         val unansweredTopics = this.topicRepository
                 .countUnansweredTopicsByCategoryId(category.id)

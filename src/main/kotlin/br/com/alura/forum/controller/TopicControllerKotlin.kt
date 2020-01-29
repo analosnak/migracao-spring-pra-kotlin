@@ -22,6 +22,8 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.WebDataBinder
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.util.UriComponentsBuilder
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 import javax.validation.Valid
 
 @RestController
@@ -58,7 +60,10 @@ class TopicControllerKotlin(val topicRepository: TopicRepository,
 
 	@GetMapping("dashboard", produces = [MediaType.APPLICATION_JSON_VALUE])
 	fun getDashboardInfo(): List<TopicDashboardItemOutputDto?> {
-		val categoriesAndTheirStatisticsData = this.dashboardDataProcessingService.execute()
+		val lastWeek = Instant.now().minus(7, ChronoUnit.DAYS)
+
+		val categoriesAndTheirStatisticsData = this.dashboardDataProcessingService.execute(lastWeek)
+
 		return TopicDashboardItemOutputDto.listFromCategories(categoriesAndTheirStatisticsData)
 	}
 
