@@ -6,7 +6,6 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
-import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -41,11 +40,5 @@ class CategoryStatisticsDataLoadingServiceTests {
         assertEquals(allTopics, statsData.allTopics)
         assertEquals(lastWeekTopics, statsData.lastWeekTopics)
         assertEquals(unansweredTopics, statsData.unansweredTopics)
-
-        verify {
-            topicRepository.countLastWeekTopicsByCategoryId(1, lastWeek)
-            topicRepository.countTopicsByCategoryId(1)
-            topicRepository.countUnansweredTopicsByCategoryId(1)
-        }
     }
 }
